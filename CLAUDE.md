@@ -94,6 +94,29 @@ When starting any new project with HTML/CSS, or touching a stylesheet for the fi
 
 **Before adding a new rule, check what already exists**: a duplicated rule block under a new ID is the main way a stylesheet drifts out of sync with itself — that's how a codebase ends up with three different "primary blue" hex values because each button was styled independently instead of reusing one.
 
+# README conventions (software repos only)
+
+When creating a new README, or adding/rewriting an "Architecture" section in an existing one, suggest including a Mermaid diagram of the codebase's architecture — don't just describe it in prose alone.
+
+Pattern to follow:
+- A short paragraph (2-4 sentences) naming the key modules/classes and how they call into each other.
+- A fenced ` ```mermaid ` block, `graph TD`, showing those same modules as nodes and their calls/data flow as edges. Group related pieces with `subgraph`. Keep node labels short (use `\n` for a second line instead of long single-line labels).
+
+Example shape:
+
+```mermaid
+graph TD
+  Entry["Entry point"] --> Core
+
+  subgraph Core["Core module"]
+    ServiceA
+    ServiceB
+  end
+
+  ServiceA --> Backend[("External system / API")]
+  ServiceB --> Backend
+```
+
 # Git Commits
 Always split changes logically into multiple commits when appropriate.
 Group related changes together and use clear, descriptive commit messages.
