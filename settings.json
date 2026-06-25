@@ -8,5 +8,6 @@
   },
   "effortLevel": "high",
   "tui": "default",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "model": "sonnet"
 }
