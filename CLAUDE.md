@@ -4,9 +4,9 @@
 
 Use ES2020+ everywhere — `const`/`let`, arrow functions, template literals, optional chaining (`?.`), nullish coalescing (`??`), `Array.includes()`, `element.remove()`. Never use `var` or old-style `function()` callbacks. Closure-capturing IIFEs (`(function(x){...})(x)`) are never needed — arrow functions in `forEach` close over `const`/`let` correctly.
 
-### JSDoc — always on functions
+### JSDoc — plain JS vs TypeScript
 
-Every function must have a JSDoc comment. Include `@param` and `@returns` tags with types. One-line description is enough; no need for verbose prose.
+**Plain `.js` files** — every function must have a JSDoc comment with typed `@param` and `@returns` tags, since there's no other source of type information. One-line description is enough.
 
 ```js
 /**
@@ -16,6 +16,8 @@ Every function must have a JSDoc comment. Include `@param` and `@returns` tags w
  */
 function getImageAsBase64(fileId) { ... }
 ```
+
+**TypeScript (`.ts`/`.tsx`)** — JSDoc is added only when the signature leaves a real question unanswered: intent, a non-obvious invariant, a gotcha, or a usage example. No `@param`/`@returns` type annotations — TS already owns that. Skip JSDoc entirely when the name + signature are self-explanatory. Litmus test: if hovering the function in an IDE still leaves you wondering "why does this work this way," add one or two sentences; otherwise don't.
 
 # Playwright Tests (E2E only — no other test frameworks in use)
 
