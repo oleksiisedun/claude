@@ -3,17 +3,9 @@
 
 # Track only these files/dirs explicitly
 !.gitignore
+!README.md
 !CLAUDE.md
 !settings.json
-
-# Memory files
-!projects/
-projects/*
-!projects/-home-oleksiisedun--claude/
-projects/-home-oleksiisedun--claude/*
-!projects/-home-oleksiisedun--claude/memory/
-projects/-home-oleksiisedun--claude/memory/*
-!projects/-home-oleksiisedun--claude/memory/*.md
 
 # Never track secrets or sensitive data
 .credentials.json
