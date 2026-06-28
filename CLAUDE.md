@@ -110,7 +110,7 @@ When starting any new project with HTML/CSS, or touching a stylesheet for the fi
 
 **The bar for extraction is low; the bar for a new abstraction is high.** A two-line helper that eliminates duplication is always worth it. A new layer of indirection that trades duplication for complexity is not — prefer a clear duplicate over a confusing abstraction.
 
-# README conventions (software repos only)
+# README conventions (all software projects)
 
 When creating a new README, or adding/rewriting an "Architecture" section in an existing one, suggest including a Mermaid diagram of the codebase's architecture — don't just describe it in prose alone.
 
@@ -132,6 +132,10 @@ graph TD
   ServiceA --> Backend[("External system / API")]
   ServiceB --> Backend
 ```
+
+# After edits (all software projects)
+
+After completing any code edits, check whether the changes affect the README or CLAUDE.md — update them if the architecture, conventions, or project setup have changed. Don't update them for routine bug fixes or small internal changes that don't affect how the project is used or understood.
 
 # Git Commits
 Always split changes logically into multiple commits when appropriate.
