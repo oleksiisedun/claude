@@ -1,4 +1,5 @@
 {
+  "model": "sonnet",
   "enabledPlugins": {
     "playwright@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
@@ -8,6 +9,5 @@
   },
   "effortLevel": "high",
   "tui": "default",
-  "remoteControlAtStartup": true,
-  "model": "sonnet"
+  "remoteControlAtStartup": true
 }
