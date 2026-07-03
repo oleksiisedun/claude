@@ -42,10 +42,10 @@ Use `data-testid` on interactive and key container elements to support automated
 <div data-testid="cash-out-popup" />
 ```
 
-**Dynamic labels** — use `toDataTestid` from `@sportsbook/utils-fe` to convert text (spaces → hyphens, lowercase):
+**Dynamic labels** — use a `toDataTestid` helper to convert text (spaces → hyphens, lowercase). Import it from `@sportsbook/utils-fe` if the project has that package; otherwise inline this implementation:
 
 ```tsx
-import { toDataTestid } from '@sportsbook/utils-fe';
+const toDataTestid = (str: string = '') => (str ?? '').replace(/\s+/g, '-').toLowerCase();
 
 <div data-testid={toDataTestid(name)} />
 // Translation key suffix: strip namespace, then convert
