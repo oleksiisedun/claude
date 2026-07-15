@@ -133,6 +133,8 @@ graph TD
   ServiceB --> Backend
 ```
 
+**Mermaid diagrams belong in README.md, not CLAUDE.md.** CLAUDE.md is read by Claude as text, not rendered — a diagram there is just parsed as syntax with no visual/spatial benefit, and it's redundant with the prose description already covering the same file/function relationships. Keep CLAUDE.md's architecture notes as prose; put the rendered diagram in the README, where it's actually useful, for human readers.
+
 # After edits (all software projects)
 
 After completing any code edits, check whether the changes affect the README or CLAUDE.md — update them if the architecture, conventions, or project setup have changed. Don't update them for routine bug fixes or small internal changes that don't affect how the project is used or understood.
