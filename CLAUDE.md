@@ -144,3 +144,7 @@ Always split changes logically into multiple commits when appropriate.
 Group related changes together and use clear, descriptive commit messages.
 Never bundle unrelated changes into a single commit.
 Never commit or push automatically — only do so after a direct explicit command from the user.
+
+# Google Apps Script (clasp) projects
+
+Never run `clasp push` (or any command that deploys/pushes code to Apps Script) unless the user gives a direct, explicit command to do so in that moment. Making the code change is fine — pushing it live is not, without asking first.
