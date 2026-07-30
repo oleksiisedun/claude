@@ -31,7 +31,7 @@ When asked to fix a test, treat it as already broken — do not run it first. To
 
 # data-testid (front-end repos only)
 
-In front-end projects that use `data-testid` attributes, follow the naming and structure conventions in @docs/data-testid.md.
+In front-end projects that use `data-testid` attributes, follow the naming and structure conventions in [docs/data-testid.md](docs/data-testid.md).
 
 # CSS design system (front-end repos only)
 
@@ -91,6 +91,8 @@ After completing any code edits, check whether the changes affect the README or 
 If the project has no CLAUDE.md or no README, suggest adding one — don't add it unprompted.
 
 If CLAUDE.md or README has grown large enough that a section would read better on its own (a lengthy convention writeup, detailed setup steps, etc.), suggest splitting it into a `/docs` directory and linking to it, rather than letting the root file keep growing.
+
+When linking to a split-out doc from CLAUDE.md, choose the reference form deliberately: use `@docs/file.md` (Claude Code's import syntax) only for content that must always be in effect regardless of project type — it loads unconditionally into every session. Use a plain Markdown link (`[docs/file.md](docs/file.md)`) for conditionally-scoped content (e.g. "front-end repos only," "projects that use X") — Claude reads it on demand when the task is actually relevant, so unrelated projects don't pay for content they'll never use.
 
 # Git Commits
 Always split changes logically into multiple commits when appropriate.
