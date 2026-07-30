@@ -6,6 +6,8 @@
 !README.md
 !CLAUDE.md
 !settings.json
+!docs/
+!docs/**
 
 # Never track secrets or sensitive data
 .credentials.json
