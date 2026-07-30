@@ -141,6 +141,10 @@ graph TD
 
 After completing any code edits, check whether the changes affect the README or CLAUDE.md — update them if the architecture, conventions, or project setup have changed. Don't update them for routine bug fixes or small internal changes that don't affect how the project is used or understood.
 
+If the project has no CLAUDE.md or no README, suggest adding one — don't add it unprompted.
+
+If CLAUDE.md or README has grown large enough that a section would read better on its own (a lengthy convention writeup, detailed setup steps, etc.), suggest splitting it into a `/docs` directory and linking to it, rather than letting the root file keep growing.
+
 # Git Commits
 Always split changes logically into multiple commits when appropriate.
 Group related changes together and use clear, descriptive commit messages.
