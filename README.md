@@ -8,7 +8,14 @@ Personal configuration for [Claude Code](https://claude.ai/code) — the Anthrop
 |---|---|
 | `CLAUDE.md` | Global coding conventions loaded by Claude at the start of every session |
 | `settings.json` | Claude Code CLI settings — model, plugins, UI, permissions |
+| `skills/` | Personal skills (`SKILL.md` per subdirectory), available across every project |
 | `.gitignore` | Deny-all with explicit allowlist — only the files above are tracked |
+
+## skills/
+
+| Skill | Summary |
+|---|---|
+| [sync-main](skills/sync-main/SKILL.md) | Merges an updated main/master into the current feature branch so a PR merges cleanly |
 
 ## CLAUDE.md
 
