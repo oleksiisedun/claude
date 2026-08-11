@@ -8,6 +8,8 @@
 !settings.json
 !docs/
 !docs/**
+!skills/
+!skills/**
 
 # Never track secrets or sensitive data
 .credentials.json
