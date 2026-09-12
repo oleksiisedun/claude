@@ -9,5 +9,7 @@
   },
   "effortLevel": "high",
   "tui": "default",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "inputNeededNotifEnabled": true
 }
