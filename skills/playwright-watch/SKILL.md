@@ -31,6 +31,15 @@ ps -eo pid,etimes,cmd | grep -i "[p]laywright test"
 - Optionally note worker/browser activity as a rough "it's actively doing
   something" signal: `pgrep -c -f "(chrome|headless_shell)"`. This is not a
   progress percentage — don't present it as one.
+- **Caveat: a live process doesn't always mean tests are still running.**
+  Playwright's built-in `html` reporter, and third-party reporters like
+  monocart-reporter, keep the process alive *after* the test run finishes to
+  serve the HTML report locally (`Serving HTML report at http://localhost:9323
+  ... Press Ctrl+C to quit`). That serving process matches the same `ps`
+  pattern as the actual test run, so Tier 1 alone cannot tell "still running
+  tests" from "done, now just serving a report." If the project uses one of
+  these reporters, say so explicitly and prefer Tier 2 for a real answer
+  instead of reporting "still running" from process presence alone.
 
 This is what to fall back on when no log file exists. It cannot report pass/fail
 counts, which test is running, or catch failures — say so if the user asks for
@@ -82,7 +91,7 @@ done — in plain text, not by dumping the log.
 Arm a `Monitor`:
 
 ```bash
-tail -f "<log>" | grep -E --line-buffered '✘|✗|^[[:space:]]*[0-9]+ (passed|failed)'
+tail -f "<log>" | grep -E --line-buffered '✘|✗|^[[:space:]]*[0-9]+ (passed|failed)|Serving HTML report at|Press Ctrl\+C to quit'
 ```
 
 - `persistent: true`
@@ -101,10 +110,21 @@ Behavior on events:
   (`tail -5 <log>`, or the `grep -c '✓'/'✘'` counts from Tier 2a) to get
   both tallies, and only treat the run as actually finished once you see
   the line carrying the duration (`... passed (Xs)`) — that one is always
-  last. Then call `PushNotification` with a concise result, e.g.
-  `"PW run (sportsbook): 46 passed, 2 failed"`, and stop the watch
-  (`TaskStop`, or let the underlying command exit on its own if it naturally
-  ends after the summary line appears).
+  last.
+- **Don't wait for the process to exit on its own** if the project uses a
+  reporter that serves an HTML report (Playwright's built-in `html` reporter,
+  monocart-reporter, etc.) — after the summary, it prints something like
+  `[MR] view report: npx monocart show-report ...` followed by
+  `Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.`
+  and then blocks forever serving that report; it will never exit by itself.
+  Treat that "Serving HTML report" / "Press Ctrl+C to quit" line as the real
+  end-of-run signal, equivalent to the process exiting. As soon as you've
+  seen both the passed/failed summary and this line, the run is done — call
+  `PushNotification` with a concise result, e.g.
+  `"PW run (sportsbook): 46 passed, 2 failed"`, and explicitly `TaskStop`
+  the watch (don't wait for the underlying command to exit — it won't).
+  If no such line ever appears, the reporter doesn't serve a report and it's
+  safe to rely on the command exiting naturally instead.
 
 ## Notes
 
