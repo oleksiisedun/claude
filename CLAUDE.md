@@ -101,6 +101,8 @@ If CLAUDE.md or README has grown large enough that a section would read better o
 
 When linking to a split-out doc from CLAUDE.md, choose the reference form deliberately: use `@docs/file.md` (Claude Code's import syntax) only for content that must always be in effect regardless of project type — it loads unconditionally into every session. Use a plain Markdown link (`[docs/file.md](docs/file.md)`) for conditionally-scoped content (e.g. "front-end repos only," "projects that use X") — Claude reads it on demand when the task is actually relevant, so unrelated projects don't pay for content they'll never use.
 
+If a design or architecture choice keeps getting re-derived or re-litigated across sessions (e.g. re-explaining why a library was picked over an alternative, or why a pattern that looks wrong is actually intentional), record it as a short ADR in `docs/decisions/` (e.g. `docs/decisions/0003-use-x-over-y.md`: context, decision, consequences) instead of re-explaining it each time. Link to it from CLAUDE.md or the README with a plain Markdown link, not `@import`.
+
 # Git Commits
 Always split changes logically into multiple commits when appropriate.
 Group related changes together and use clear, descriptive commit messages.
