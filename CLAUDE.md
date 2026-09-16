@@ -59,6 +59,14 @@ When starting any new project with HTML/CSS, or touching a stylesheet for the fi
 
 **The bar for extraction is low; the bar for a new abstraction is high.** A two-line helper that eliminates duplication is always worth it. A new layer of indirection that trades duplication for complexity is not — prefer a clear duplicate over a confusing abstraction.
 
+# File size and splitting (all software projects)
+
+Keep files scoped to one responsibility. If a file grows past roughly 300-400 lines **and** contains more than one clear responsibility (e.g. a service class plus its unrelated helpers, or a component plus unrelated utility functions), split it along that responsibility boundary into separate files.
+
+Don't split a cohesive, single-purpose file just to hit a line count — a long file that does one thing well is better than several small files that only make sense read together. The trigger is mixed responsibilities, not length alone; length is just the signal to go look.
+
+When splitting, name each new file after the responsibility it holds, not after the file it was extracted from.
+
 # README conventions (all software projects)
 
 When creating a new README, or adding/rewriting an "Architecture" section in an existing one, suggest including a Mermaid diagram of the codebase's architecture — don't just describe it in prose alone.
