@@ -111,6 +111,17 @@ When linking to a split-out doc from CLAUDE.md, choose the reference form delibe
 
 If a design or architecture choice keeps getting re-derived or re-litigated across sessions (e.g. re-explaining why a library was picked over an alternative, or why a pattern that looks wrong is actually intentional), record it as a short ADR in `docs/decisions/` (e.g. `docs/decisions/0003-use-x-over-y.md`: context, decision, consequences) instead of re-explaining it each time. Link to it from CLAUDE.md or the README with a plain Markdown link, not `@import`.
 
+# Machine-checkable guardrails (all software projects)
+
+When working in a project, check whether it has commands an agent can run to verify its own work — a linter, a type checker, a formatter check, a build, a dependency/import-boundary check. If some are missing, suggest adding them (don't add them unprompted), and say which mistakes each would catch. Prefer a check that fails loudly with a non-zero exit code over a convention that only lives in prose.
+
+- **One entry point**: expose the checks as named scripts (e.g. `npm run lint`, `npm run typecheck`, `make check`) and, if there are several, a single aggregate command, so an agent doesn't have to guess the invocation.
+- **Fast and deterministic**: guardrails an agent runs after every edit should finish in seconds and never depend on network or flaky state. Slower checks belong in CI, not in the edit loop.
+- **Turn recurring review comments into rules**: if the same mistake keeps getting corrected by hand (a banned pattern, a naming convention, a forbidden import), suggest encoding it as a lint rule or a small script rather than restating it in CLAUDE.md.
+- **Enforce at the edges too**: suggest wiring the aggregate command into a pre-commit hook or CI so the guardrail can't be skipped — but never install hooks or CI config unprompted.
+- **Document the commands** in the project's CLAUDE.md so future sessions know what to run and when.
+- **Stay within existing tooling**: this doesn't override the E2E-only testing rule above — suggest static checks (lint, types, format, build), not new unit-test frameworks.
+
 # Git Commits
 Always split changes logically into multiple commits when appropriate.
 Group related changes together and use clear, descriptive commit messages.
