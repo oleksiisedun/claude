@@ -10,6 +10,7 @@
 !docs/**
 !skills/
 !skills/**
+skills/synced/
 
 # Never track secrets or sensitive data
 .credentials.json
