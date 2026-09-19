@@ -109,4 +109,4 @@ Never read, browse, or search files outside the current project's working direct
 
 Never run `clasp push` (or any command that deploys/pushes code to Apps Script) unless the user gives a direct, explicit command to do so in that moment. Making the code change is fine — pushing it live is not, without asking first.
 
-For clasp project setup (suggesting the latest `@types/google-apps-script`, `.claspignore` entries), see [docs/google-apps-script.md](docs/google-apps-script.md).
+For clasp project setup (suggesting the `src/` directory layout with `rootDir`, the latest `@types/google-apps-script`, `.claspignore` entries), see [docs/google-apps-script.md](docs/google-apps-script.md).
