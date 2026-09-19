@@ -43,7 +43,7 @@ In projects that use Playwright, read [docs/playwright-tests.md](docs/playwright
 
 ### data-testid
 
-In front-end projects that use `data-testid` attributes, follow the naming and structure conventions in [docs/data-testid.md](docs/data-testid.md).
+In front-end projects that use `data-testid` attributes, read [docs/data-testid.md](docs/data-testid.md) before adding or changing one, and follow its naming and structure conventions.
 
 ### CSS design system
 
