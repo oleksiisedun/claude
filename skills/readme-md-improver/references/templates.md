@@ -279,6 +279,46 @@ graph TD
 
 ---
 
+## Template: Slim README with a docs/ index
+
+Use when a README has been (or is being) split — see [splitting-guidelines.md](splitting-guidelines.md). The README stays the entry point; reference lives in `docs/`.
+
+```markdown
+# <Project Name>
+
+<One-line description>
+
+To set it up, see [Getting started](#getting-started). Detailed reference (<topics>) is under [Documentation](#documentation).
+
+## How it works
+
+<2-4 sentence paragraph + Mermaid diagram + file table>
+
+## Features
+
+- **<Feature>** — <one line>
+- **<Feature>** — <one line>
+
+See [Features](docs/features.md) for the details.
+
+## Getting started
+
+<Prerequisites, install, create any git-ignored config, run>
+
+## Development
+
+<check/lint/typecheck commands from package.json>
+
+## Documentation
+
+- [<Topic>](docs/<topic>.md) — <what's in it>
+- Contributors: [<internals>](docs/architecture-<x>.md)
+```
+
+Each new docs file starts with a `# Title`, a one-line intro, and `Back to the [README](../README.md)`; moved `##`/`###` headings keep their levels.
+
+---
+
 ## Update Principles
 
 When updating any README.md:

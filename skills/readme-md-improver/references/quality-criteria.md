@@ -97,6 +97,21 @@
 5. List specific issues found
 6. Propose concrete improvements
 
+### Verification recipes
+
+Every README claim you report as stale or correct should have been checked, not assumed:
+
+| Claim in README | Check |
+|-----------------|-------|
+| A CLI command (`tool sub-cmd`) | `<tool> --version`, then `<tool> --help` / `<tool> <cmd> --help` for the **installed** version. An unknown subcommand prints top-level help instead of erroring — read the output. Never run push/deploy/publish to test. |
+| A file the reader must have (`.env`, `.clasp.json`, a targets/config file) | `git check-ignore -v <file>` / read `.gitignore`. If it's ignored, a fresh clone lacks it — the README must say how to create it and what it must contain. Confirm a minimal version works with a read-only command (e.g. `clasp status` against a scratch config) before documenting it. |
+| Setup steps | List what scripts in the repo shell out to (`jq`, `curl`, …) and confirm each is a stated prerequisite. |
+| Dev workflow | Read `package.json` `scripts` / `Makefile` targets; every check, lint, typecheck script should appear. Run the aggregate command once (it must be fast, local and non-destructive) and report the result. |
+| A function/file/constant named in prose | `grep`/`ls` for it. |
+| Config tables | Diff the documented constants against the config file; ignore purely internal regexes/helpers. |
+| Relative links and anchors | `python3 ~/.claude/skills/readme-md-improver/scripts/check_md_links.py` |
+| Declared license | `ls LICENSE*` vs. the `license` field in `package.json`; flag a mismatch, don't create the file. |
+
 ## Red Flags
 
 - Install/run commands that would fail (renamed scripts, wrong package manager)
@@ -107,3 +122,8 @@
 - Multi-module/service project with an Architecture section but no diagram
 - Broken relative links to docs that have moved
 - "Coming soon" sections that have clearly been stale for a long time
+- Getting-started steps that need a git-ignored file the README never tells the reader to create
+- Documented commands that don't exist in the installed CLI version
+- Changelog-style prose ("now…", "previously…", "used to…") describing history instead of current behavior
+- 250+ lines mixing onboarding with per-feature reference (schema tables, config tables, algorithm notes) — recommend a split per [splitting-guidelines.md](splitting-guidelines.md); not scored, but report line count and per-section sizes
+- README duplicating `docs/architecture-*.md` content — flag only, since the audiences differ

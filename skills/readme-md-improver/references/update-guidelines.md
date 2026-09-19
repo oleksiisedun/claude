@@ -93,6 +93,24 @@ PRs welcome — please include a test for any behavior change.
 
 Why: Establishes the expected loop for anyone touching the code.
 
+### 6. A Setup Path That Actually Closes
+
+If a required file is git-ignored (`.env`, `.clasp.json`, a targets list), show how to create it and give its minimal contents, plus any setting that silently changes behavior when missing (e.g. clasp's `"rootDir"`). List external tools scripts need (`jq`, …) under Prerequisites. Use current command names for the installed CLI version.
+
+```markdown
+Create `.clasp.json` in the repo root (it's git-ignored):
+
+{ "scriptId": "<script-id>", "rootDir": "src" }
+```
+
+### 7. Every Check Script in Development
+
+Read `package.json` scripts / `Makefile` and list each check/lint/typecheck command with one clause on what it catches; say plainly if there is no test suite or build step.
+
+### 8. A Split for an Oversized README
+
+When the README is 250+ lines with a reference half, propose moving that half to new user-facing `docs/*.md` files, leaving a short Features overview and a Documentation index behind. Method, what stays, and the verification step: [splitting-guidelines.md](splitting-guidelines.md).
+
 ## What NOT to Add
 
 ### 1. Restating the Obvious from the Code
@@ -123,6 +141,18 @@ Never write a command into the README without checking it's real (matches an act
 ### 5. Stale Info Left "Just in Case"
 
 If a section describes a feature/stack that's been removed, remove or update it — don't leave it "for reference."
+
+### 6. Retyping Moved Content
+
+When splitting, move sections verbatim by line range; never rewrite them "while you're at it" — it makes the move unreviewable and can silently drop detail. Wording fixes are separate, shown diffs.
+
+### 7. Pouring User Reference into Contributor Docs
+
+Don't merge README reference material into `docs/architecture-*.md` (or similar contributor/agent docs linked from CLAUDE.md). Create separate user-facing files.
+
+### 8. Creating Files the User Should Decide On
+
+Don't add a `LICENSE`, CI config, or hooks. Flag a declared-but-missing license; suggest the rest.
 
 ## Diff Format for Updates
 
@@ -166,3 +196,6 @@ Before finalizing an update, verify:
 - [ ] No boilerplate or placeholder text left in
 - [ ] Existing tone/structure/sections (badges, sponsors, etc.) preserved, not overwritten wholesale
 - [ ] Would a first-time reader actually be able to get this running from what's written?
+- [ ] `scripts/check_md_links.py` reports 0 broken links/anchors (and, after a split, only deliberately reworded lines are "not found")
+- [ ] No changelog-style wording ("now", "previously") in text you added or touched
+- [ ] After a split: README keeps a Features overview and a Documentation index; a CLAUDE.md pointer was proposed if CLAUDE.md maps the docs
