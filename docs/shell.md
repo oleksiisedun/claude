@@ -12,4 +12,5 @@
 ### Guardrails
 
 - **Lint**: `shellcheck`. **Format**: `shfmt -d` (check) / `shfmt -w` (fix).
+- **Tests**: `bats-core`, and only for scripts with real logic (parsing, branching, destructive operations). For simple glue, shellcheck is enough. See [unit-tests.md](unit-tests.md).
 - If the project has no aggregate check, suggest one (`make check` or a `scripts/check.sh`) running both — suggest it, don't add it unprompted. Document it in the project's CLAUDE.md.
