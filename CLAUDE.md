@@ -3,6 +3,8 @@
 Read the matching doc before writing or editing code in that language — these are not loaded automatically.
 
 - **JavaScript / TypeScript** (`.js`, `.ts`, `.tsx`): [docs/javascript.md](docs/javascript.md) — modern JS only, JSDoc rules.
+- **Python** (`.py`): [docs/python.md](docs/python.md) — tooling, type hints, docstring rule.
+- **Shell** (`.sh`, bash scripts): [docs/shell.md](docs/shell.md) — strict mode, quoting, shellcheck/shfmt.
 
 # Code duplication (all software projects)
 
@@ -46,6 +48,7 @@ When working in a project, check whether it has commands an agent can run to ver
 - **Enforce at the edges too**: suggest wiring the aggregate command into a pre-commit hook or CI so the guardrail can't be skipped — but never install hooks or CI config unprompted.
 - **Document the commands** in the project's CLAUDE.md so future sessions know what to run and when.
 - **Stay within existing tooling**: this doesn't override the E2E-only testing rule above — suggest static checks (lint, types, format, build), not new unit-test frameworks.
+- **Language-specific picks**: concrete linters/type checkers per language live in the language docs linked under "Language conventions" above.
 
 ### Keep CLAUDE.md and README current
 
