@@ -20,7 +20,7 @@ Read the matching doc before writing or editing code in that language — these 
 
 **The bar for extraction is low; the bar for a new abstraction is high.** A two-line helper that eliminates duplication is always worth it. A new layer of indirection that trades duplication for complexity is not — prefer a clear duplicate over a confusing abstraction.
 
-# Playwright Tests (E2E only — no other test frameworks in use)
+# Playwright Tests (E2E)
 
 In projects that use Playwright, read [docs/playwright-tests.md](docs/playwright-tests.md) before writing, running, or fixing a test — it says when not to run one.
 
@@ -47,7 +47,7 @@ When working in a project, check whether it has commands an agent can run to ver
 - **Turn recurring review comments into rules**: if the same mistake keeps getting corrected by hand (a banned pattern, a naming convention, a forbidden import), suggest encoding it as a lint rule or a small script rather than restating it in CLAUDE.md.
 - **Enforce at the edges too**: suggest wiring the aggregate command into a pre-commit hook or CI so the guardrail can't be skipped — but never install hooks or CI config unprompted.
 - **Document the commands** in the project's CLAUDE.md so future sessions know what to run and when.
-- **Stay within existing tooling**: this doesn't override the E2E-only testing rule above — suggest static checks (lint, types, format, build), not new unit-test frameworks.
+- **Stay within existing tooling**: lead with static checks (lint, types, format, build). Suggest a new test framework (unit or otherwise) only if it fills a real gap, and never add one unprompted.
 - **Language-specific picks**: concrete linters/type checkers per language live in the language docs linked under "Language conventions" above.
 
 ### Keep CLAUDE.md and README current
