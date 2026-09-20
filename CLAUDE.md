@@ -2,9 +2,9 @@
 
 Read the matching doc before writing or editing code in that language — these are not loaded automatically.
 
-- **JavaScript / TypeScript** (`.js`, `.ts`, `.tsx`): [docs/javascript.md](docs/javascript.md) — modern JS only, JSDoc rules.
-- **Python** (`.py`): [docs/python.md](docs/python.md) — tooling, type hints, docstring rule.
-- **Shell** (`.sh`, bash scripts): [docs/shell.md](docs/shell.md) — strict mode, quoting, shellcheck/shfmt.
+- **JavaScript / TypeScript** (`.js`, `.ts`, `.tsx`): [docs/javascript.md](docs/javascript.md) — modern JS only, JSDoc rules, test runner.
+- **Python** (`.py`): [docs/python.md](docs/python.md) — tooling, type hints, docstring rule, pytest.
+- **Shell** (`.sh`, bash scripts): [docs/shell.md](docs/shell.md) — strict mode, quoting, shellcheck/shfmt, bats.
 
 # Code duplication (all software projects)
 
@@ -19,6 +19,12 @@ Read the matching doc before writing or editing code in that language — these 
 **Configuration and magic values belong in one place.** Constants, regex patterns, type definitions, and tuning parameters should be declared once (in a config or constants file) and referenced everywhere. Never inline a value that appears — or could appear — in more than one location.
 
 **The bar for extraction is low; the bar for a new abstraction is high.** A two-line helper that eliminates duplication is always worth it. A new layer of indirection that trades duplication for complexity is not — prefer a clear duplicate over a confusing abstraction.
+
+# Unit tests (all software projects)
+
+If the project has a test setup, use it: add or update unit tests for new logic and bug fixes, and run the relevant tests before calling the work done — without asking (the ask-first rule is Playwright-only). While working, proactively flag untested code where a test would really help, naming the function and the bug it would catch. If there is no test setup, suggest one (see the guardrails section below) — never add a framework unprompted.
+
+Read [docs/unit-tests.md](docs/unit-tests.md) before writing tests or suggesting them — it covers where tests pay off, what to skip, and testability.
 
 # Playwright Tests (E2E)
 
@@ -47,7 +53,7 @@ When working in a project, check whether it has commands an agent can run to ver
 - **Turn recurring review comments into rules**: if the same mistake keeps getting corrected by hand (a banned pattern, a naming convention, a forbidden import), suggest encoding it as a lint rule or a small script rather than restating it in CLAUDE.md.
 - **Enforce at the edges too**: suggest wiring the aggregate command into a pre-commit hook or CI so the guardrail can't be skipped — but never install hooks or CI config unprompted.
 - **Document the commands** in the project's CLAUDE.md so future sessions know what to run and when.
-- **Stay within existing tooling**: lead with static checks (lint, types, format, build). Suggest a new test framework (unit or otherwise) only if it fills a real gap, and never add one unprompted.
+- **Stay within existing tooling**: lead with static checks (lint, types, format, build). Suggest a new test framework (unit or otherwise) only if it fills a real gap, and never add one unprompted (see [docs/unit-tests.md](docs/unit-tests.md) for where tests pay off).
 - **Language-specific picks**: concrete linters/type checkers per language live in the language docs linked under "Language conventions" above.
 
 ### Keep CLAUDE.md and README current

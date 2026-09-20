@@ -1,6 +1,6 @@
-# Playwright tests (E2E only)
+# Playwright tests (E2E)
 
-E2E only — no other test frameworks in use. For selector naming, see [data-testid.md](data-testid.md).
+Playwright covers UI flows; logic-level tests belong in unit tests (see [unit-tests.md](unit-tests.md)). For selector naming, see [data-testid.md](data-testid.md).
 
 In projects that use Playwright:
 
