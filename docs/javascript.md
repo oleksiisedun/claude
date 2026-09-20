@@ -27,5 +27,6 @@ Where tests are worth adding, see [unit-tests.md](unit-tests.md). Use the projec
 
 - **TypeScript, Vite, or bundled projects**: Vitest. **Dependency-free plain JS scripts**: the built-in `node --test`.
 - **Script**: expose a single-run `test` script (`vitest run`, not watch mode) so the command exits and can be used as a check.
-- **Layout**: follow the existing convention; otherwise colocate `*.test.ts` / `*.test.js` next to the source.
+- **Layout**: always put tests in a top-level `tests/` directory (plural), not `test/` (the runner default) and not colocated next to the source. If the project already has a `test/` directory, suggest renaming it to `tests/` (don't rename unprompted) and, until it's renamed, add new tests there rather than creating a second directory.
+- **Node runner and `tests/`**: `node --test` only auto-discovers `test/`, so point it at the directory explicitly with a glob — `node --test "tests/**/*.test.js"` (quoted, so Node expands it and it works on Node 21+, where bare directory arguments no longer recurse). Vitest finds `*.test.ts` anywhere, so it needs no extra config.
 - **Apps Script (clasp)**: keep logic in pure functions that take plain values, and confine `SpreadsheetApp`/`DriveApp`/etc. calls to thin wrappers, so the logic runs under Node without mocks.
