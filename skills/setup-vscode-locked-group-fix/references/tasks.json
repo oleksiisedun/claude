@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Unlock and tidy editor groups",
+      "type": "process",
+      "command": "/usr/bin/true",
+      "args": ["${input:unlockAll}"],
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "reveal": "never",
+        "echo": false,
+        "focus": false,
+        "close": true
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "unlockAll",
+      "type": "command",
+      "command": "runCommands",
+      "args": {
+        "commands": [
+          "workbench.action.unlockEditorGroup",
+          "workbench.action.focusNextGroup",
+          "workbench.action.unlockEditorGroup",
+          "workbench.action.focusNextGroup",
+          "workbench.action.joinAllGroups"
+        ]
+      }
+    }
+  ]
+}
