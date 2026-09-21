@@ -23,3 +23,13 @@ Keep pure logic separate from I/O and runtime APIs (DOM, Apps Script globals, ne
 ### Unit tests vs Playwright
 
 Unit tests cover logic; Playwright covers UI flows. Unit tests are fast and deterministic — run them without asking. The ask-before-running rule applies to Playwright only.
+
+### E2E-only projects
+
+A project with Playwright and no unit runner already has a test setup. Don't suggest adding a unit framework by default — a second runner brings its own config, scripts, CI step and a competing tests directory.
+
+Suggest one only when both hold:
+- There is substantial pure logic (parsers, money/date math, state machines) that E2E covers badly — name the function and the bug a unit test would catch.
+- It can share the layout cleanly: unit tests in `tests/unit/`, E2E in `tests/e2e/`, one aggregate `test` script. If that can't be done without a mess, skip it.
+
+Never suggest it for thin glue, small UIs, or static sites.
