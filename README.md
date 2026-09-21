@@ -18,7 +18,7 @@ Personal configuration for [Claude Code](https://claude.ai/code) — the Anthrop
 |---|---|
 | [sync-main](skills/sync-main/SKILL.md) | Merges an updated main/master into the current feature branch so a PR merges cleanly |
 | [readme-md-improver](skills/readme-md-improver/SKILL.md) | Audits README.md files against a quality template and applies targeted fixes |
-| [project-improver](skills/project-improver/SKILL.md) | Audits the whole current project against the global `CLAUDE.md` (read fresh at run time), reports findings by section, and applies only approved fixes |
+| [project-improver](skills/project-improver/SKILL.md) | Audits the whole current project against the global `CLAUDE.md` (read fresh at run time), reports graded findings by section, and applies only approved fixes |
 | [free-up-memory](skills/free-up-memory/SKILL.md) | Diagnoses memory usage and kills a process only on the user's explicit, named confirmation |
 
 ## CLAUDE.md

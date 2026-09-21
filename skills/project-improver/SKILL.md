@@ -63,6 +63,7 @@ Output the report **before** any change. Keep it scannable:
 
 **Scope:** <what was checked / sampled, which CLAUDE.md sections were skipped and why>
 **Checks run:** <commands and their result>
+**Grades:** <Section> A · <Section> C · <Section> D · ... (skipped sections omitted)
 
 ### Top priorities
 1. <highest-impact finding, one line>
@@ -70,7 +71,7 @@ Output the report **before** any change. Keep it scannable:
 
 ### Findings by CLAUDE.md section
 
-#### <Section name> — <compliant | N findings>
+#### <Section name> — <grade> (<N findings by severity | compliant>)
 - **[High|Med|Low] <finding>** — `path/file.ext:42` — <evidence>. *Fix:* <concrete proposed change>. *Effort:* <S|M|L>
 
 ### Suggestions (need explicit approval — not applied by default)
@@ -82,6 +83,18 @@ Output the report **before** any change. Keep it scannable:
 
 Rank by impact on an agent's ability to orient, verify its own work, and avoid regressions — not by count. Separate **fixes** (bring existing code in line with the rules) from **suggestions** (add something new). Don't pad: a compliant section is one line.
 
+**Grades.** Give each applicable section a letter, derived mechanically from its finding severities — no separate judgment call:
+
+| Grade | Rule |
+|---|---|
+| A | No findings |
+| B | Low findings only |
+| C | At least one Med, no High |
+| D | At least one High |
+| F | The area is absent entirely (e.g. no checks of any kind, no CLAUDE.md) |
+
+Skipped sections get no grade. Do **not** compute a numeric score or an overall average — sections differ too much in weight (guardrails and CLAUDE.md/README currency matter far more than scoping) for an average to mean anything. Something the rules call for that is missing (no lint/type check, no test setup, no README) is itself a finding, graded by its severity — F if the whole area is absent. The **Suggestions** section only holds the concrete tooling proposals for those gaps and is not graded separately.
+
 End by asking which items to apply (all fixes / specific numbers / none).
 
 ### Phase 5: Apply
@@ -89,5 +102,12 @@ End by asking which items to apply (all fixes / specific numbers / none).
 Apply only what the user approved, following the language docs and the duplication/scoping rules while editing. Then:
 
 - Re-run the relevant lint/type/test commands and report actual results; if something fails, say so with the output.
+- Re-grade only the sections you touched, re-checking each against the repo (not from memory of what you changed), and show a before/after table. Sections whose findings the user declined keep their old grade.
+
+  ```
+  | Section | Before | After |
+  |---|---|---|
+  | Machine-checkable guardrails | D | B |
+  ```
 - If edits change architecture, conventions, or setup, update README/CLAUDE.md per the "Keep CLAUDE.md and README current" section.
 - Do **not** commit. If the user later asks, split into logical commits per the Git commits rules.
