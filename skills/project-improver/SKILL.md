@@ -21,15 +21,21 @@ Audit the **current project** against the user's global `~/.claude/CLAUDE.md` an
 
 ### Phase 1: Orient
 
-Establish the facts the audit depends on, with `ls`, `git ls-files | head`, and the manifest files (`package.json`, `pyproject.toml`, `Makefile`, `appsscript.json`, ...):
+Establish the facts the audit depends on, with `ls`, `git ls-files | head`, and the manifest files (`package.json`, `pyproject.toml`, `go.mod`, `CMakeLists.txt`, `Makefile`, `appsscript.json`, ...):
 
-- Languages present (`.js`/`.ts`/`.tsx`, `.py`, `.sh`) — decides which language docs apply.
+- Languages present — decides which language docs apply. Match them against the docs actually in `~/.claude/docs/` and linked from the CLAUDE.md "Language conventions" list, not a fixed list. Any language without a doc (C, Go, ...) is **undocumented**: list it, and handle it per "Undocumented languages" below.
 - Front-end project? Uses `data-testid`? Has stylesheets? Uses Playwright? Is a clasp project?
 - Existing check commands (lint, typecheck, format, build, test) and whether an aggregate one exists.
 - Existing `README.md`, `CLAUDE.md`, `docs/`, `docs/decisions/`, CI config, pre-commit hooks.
 - File sizes: `git ls-files | xargs wc -l | sort -rn | head -20` to spot scoping candidates.
 
 If the repo is large, sample by module instead of reading everything; say what you sampled.
+
+**Undocumented languages.** The user's conventions say nothing about them, so:
+- Skip the *Language conventions* section for that language and say so under **Scope** ("no doc for Go — language conventions not audited"). It doesn't count toward the section's grade, so it can't read as compliant; if no language in the project has a doc, the whole section is skipped and ungraded.
+- Don't invent rules or a test layout for it. The language-agnostic sections (duplication, unit tests, guardrails, README/CLAUDE.md, docs/ADRs, scoped files) still apply in full.
+- Tooling suggestions for it (linter, formatter, type checker) are fine, but label them *general knowledge, not a user convention*.
+- Add one suggestion: write `docs/<language>.md` and link it from the global CLAUDE.md, so the next audit has rules to check.
 
 ### Phase 2: Load the rules
 
@@ -61,7 +67,7 @@ Output the report **before** any change. Keep it scannable:
 ```
 ## Project Review: <project name>
 
-**Scope:** <what was checked / sampled, which CLAUDE.md sections were skipped and why>
+**Scope:** <what was checked / sampled, which CLAUDE.md sections were skipped and why, undocumented languages>
 **Checks run:** <commands and their result>
 **Grades:** <Section> A · <Section> C · <Section> D · ... (skipped sections omitted)
 
