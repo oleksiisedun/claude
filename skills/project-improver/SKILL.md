@@ -14,7 +14,8 @@ Audit the **current project** against the user's global `~/.claude/CLAUDE.md` an
 
 - Audit only the current working directory. Never read other projects on disk, even for inspiration.
 - Never commit or push. Never run deploy/publish commands (`clasp push`, `npm publish`, etc.).
-- Never install tooling, hooks, CI config, a test framework, or a new file *unprompted* — these are **suggestions in the report**; they are applied only when the user approves that specific item.
+- Never install tooling, a test framework, or a new file *unprompted* — these are **suggestions in the report**; they are applied only when the user approves that specific item.
+- Never suggest a pre-commit hook or CI config in the report, even though the global CLAUDE.md's guardrails section mentions wiring one — that decision is out of scope for this skill.
 - Never run Playwright tests without asking first (see `docs/playwright-tests.md`).
 
 ## Workflow
@@ -52,7 +53,7 @@ Walk the CLAUDE.md **section by section**, in order, skipping sections that don'
 | Code duplication | Look for repeated blocks, regexes, constants, and type definitions across files (`grep` for repeated literals; skim sibling modules). Flag each pattern that appears **twice**, with both locations. |
 | Unit tests | Is there a test setup? Do tests live where the language doc says? Run the existing test command. Name untested functions where a test would catch a real bug (per `docs/unit-tests.md`). Playwright counts as a test setup: for an E2E-only project, don't suggest a unit framework unless the exception in `docs/unit-tests.md` ("E2E-only projects") applies, and then name the specific logic it would cover. No setup at all → suggest one, don't add it. |
 | Playwright / data-testid / CSS design system | Only if applicable. Compare against the doc: naming, `:root` tokens, shared classes, one broad rule per interaction state, duplicate rules. |
-| Machine-checkable guardrails | Inventory existing checks; list which of lint / typecheck / format check / build / boundary check are missing, and for each the specific mistake it would catch. Is there one aggregate entry point? Are commands documented in CLAUDE.md? Wired into pre-commit or CI? |
+| Machine-checkable guardrails | Inventory existing checks; list which of lint / typecheck / format check / build / boundary check are missing, and for each the specific mistake it would catch. Is there one aggregate entry point? Are commands documented in CLAUDE.md? |
 | CLAUDE.md and README currency | Do commands, paths, and described structure match the repo now? Missing CLAUDE.md/README → suggest. Architecture section lacking a Mermaid diagram (checked against `docs/readme-mermaid.md`) → suggest. For a deep pass, hand off to `readme-md-improver` / `claude-md-management:claude-md-improver`. |
 | Docs, splitting and ADRs | Oversized CLAUDE.md/README sections that should move to `docs/`; `@import` vs plain link used correctly; design choices that look wrong-but-intentional and deserve an ADR. |
 | Scoped files | Files past ~300-400 lines **and** with more than one responsibility. Length alone is not a finding — cohesive long files are fine. |
@@ -85,7 +86,7 @@ Output the report **before** any change. Keep it scannable:
 - **2a · ...**
 
 ### Suggestions (need explicit approval — not applied by default)
-- **S1** <new tooling / hooks / CI / test framework>, with the mistakes it would catch
+- **S1** <new tooling / test framework>, with the mistakes it would catch
 
 ### Already good
 - <brief list of sections/areas that comply>
