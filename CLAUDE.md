@@ -89,6 +89,8 @@ Group related changes together and use clear, descriptive commit messages.
 Never bundle unrelated changes into a single commit.
 Never commit or push automatically — only do so after a direct explicit command from the user.
 
+Before committing, check whether the project has guardrail commands (lint, typecheck, format check, build, tests) and run the ones relevant to what changed — but only when it makes sense for the change. A pure docs/comment/config-value change doesn't warrant a linter or test run; a logic change does. Use judgment on which specific checks apply rather than always running the full suite.
+
 ### Working directory boundaries (all projects)
 
 Never read, browse, or search files outside the current project's working directory — including other project folders elsewhere on disk (e.g. to borrow ideas, styling, or patterns) — unless the user has explicitly given permission and named the path in the current conversation. This applies even if it seems like it would produce a better or faster result. If outside context would genuinely help, ask the user first and name the specific path you want to look at.
