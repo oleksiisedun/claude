@@ -84,9 +84,7 @@ When splitting, name each new file after the responsibility it holds, not after 
 
 ### Git commits
 
-Always split changes logically into multiple commits when appropriate.
-Group related changes together and use clear, descriptive commit messages.
-Never bundle unrelated changes into a single commit.
+Split changes into logical commits — one concern per commit, each with a clear, descriptive message.
 Never commit or push automatically — only do so after a direct explicit command from the user.
 
 Before committing, check whether the project has guardrail commands (lint, typecheck, format check, build, tests) and run the ones relevant to what changed — but only when it makes sense for the change. A pure docs/comment/config-value change doesn't warrant a linter or test run; a logic change does. Use judgment on which specific checks apply rather than always running the full suite.
