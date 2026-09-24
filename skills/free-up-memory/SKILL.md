@@ -1,6 +1,6 @@
 ---
 name: free-up-memory
-description: This skill should be used when the user asks to "free up memory", "free up RAM", "check memory usage", "what's using all the memory", "find processes to kill for memory", "the system is low on memory", "a background run got OOM-killed", or otherwise wants help diagnosing high memory usage and reclaiming it by stopping processes. Semi-automatic: it only ever analyzes and suggests — it kills a process solely on the user's direct, explicit command naming that process or PID.
+description: Diagnose high system memory (RAM/swap) usage and reclaim it by stopping processes. Use when the user wants to check or free up memory, find what is using it, or recover after something was OOM-killed. Semi-automatic: it only ever analyzes and suggests — it kills a process solely on the user's direct, explicit command naming that process or PID.
 tools: Bash
 ---
 

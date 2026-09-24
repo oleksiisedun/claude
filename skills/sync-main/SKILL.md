@@ -1,6 +1,6 @@
 ---
 name: sync-main
-description: This skill should be used when the user asks to "sync my branch with main", "update my feature branch with main", "merge main into my branch", "bring in the latest changes from main", "get latest main into my branch", "pull in coworker's changes", or wants their feature branch caught up with an updated main/master branch before opening or updating a pull request.
+description: Bring the current feature branch up to date with the remote default branch (main/master) by merging it in. Use when the user wants their branch synced with, updated from, or caught up to main — including pulling in teammates' merged changes — typically before opening or updating a pull request.
 ---
 
 # Sync Feature Branch with Main
