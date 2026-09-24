@@ -10,6 +10,6 @@
   "effortLevel": "high",
   "tui": "default",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
-  "inputNeededNotifEnabled": true
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
