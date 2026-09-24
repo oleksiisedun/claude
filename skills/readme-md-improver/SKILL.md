@@ -61,7 +61,7 @@ Verify claims against the repo, don't just read them: check commands against the
 
 ### Phase 3: Quality Report Output
 
-**ALWAYS output the quality report BEFORE making any updates.**
+Output the quality report before making any updates.
 
 Format:
 
@@ -109,7 +109,7 @@ After the report, list the concrete proposed updates as numbered diffs (see Phas
 
 After outputting the quality report, ask the user for confirmation before updating.
 
-**Update Guidelines (Critical):** see [references/update-guidelines.md](references/update-guidelines.md) for full detail. In short:
+**Update guidelines:** see [references/update-guidelines.md](references/update-guidelines.md) for full detail. In short:
 
 1. **Propose targeted additions only** — missing install steps, a stale command, an out-of-date architecture description, a missing usage example, an unlisted required env var.
 2. **Verify before writing** — check that commands, file paths, and dependency names discovered during analysis are actually still real (grep/`ls`/`package.json`, etc.) rather than assumed.
