@@ -19,7 +19,7 @@ function getImageAsBase64(fileId) { ... }
 
 **TypeScript (`.ts`/`.tsx`)** — JSDoc is added only when the signature leaves a real question unanswered: intent, a non-obvious invariant, a gotcha, or a usage example. No `@param`/`@returns` type annotations — TS already owns that. Skip JSDoc entirely when the name + signature are self-explanatory. Litmus test: if hovering the function in an IDE still leaves you wondering "why does this work this way," add one or two sentences; otherwise don't.
 
-**Keeping JSDoc in sync** — whenever a function's signature or behavior changes, updating its JSDoc is mandatory, not optional. This includes: added/removed/renamed parameters, changed types, changed return value, or a changed description of what it does. Never leave a stale JSDoc comment describing the old behavior.
+**Keeping JSDoc in sync** — when a function's signature or behavior changes (added/removed/renamed parameters, changed types or return value, changed purpose), update its JSDoc in the same edit so it describes the current behavior.
 
 ### Testing
 
