@@ -1,8 +1,6 @@
 # data-testid (front-end repos only)
 
-In front-end projects that use `data-testid` attributes:
-
-Use `data-testid` on interactive and key container elements to support automated testing.
+In front-end projects that use `data-testid` attributes, put them on interactive and key container elements to support automated testing.
 
 **Naming**: always kebab-case, semantic (what the element IS or DOES, not implementation).
 
@@ -10,16 +8,16 @@ Use `data-testid` on interactive and key container elements to support automated
 
 ```tsx
 <button data-testid="confirm-button" />
-<div data-testid="cash-out-popup" />
+<div data-testid="checkout-popup" />
 ```
 
-**Dynamic labels** — use a `toDataTestid` helper to convert text (spaces → hyphens, lowercase). Import it from `@sportsbook/utils-fe` if the project has that package; otherwise inline this implementation:
+**Dynamic labels** — convert text with a helper (spaces → hyphens, lowercase). If the project already has one (search for `toDataTestid` or similar, including shared utility packages), use it; otherwise add this implementation once in the project's utils:
 
 ```tsx
-const toDataTestid = (str: string = '') => (str ?? '').replace(/\s+/g, '-').toLowerCase();
+const toDataTestid = (str?: string | null) => (str ?? '').replace(/\s+/g, '-').toLowerCase();
 
 <div data-testid={toDataTestid(name)} />
-// Translation key suffix: strip namespace, then convert
+// Namespaced translation key: strip the namespace, then convert
 <div data-testid={toDataTestid(text.split('::').at(-1))} />
 ```
 
@@ -36,7 +34,7 @@ const toDataTestid = (str: string = '') => (str ?? '').replace(/\s+/g, '-').toLo
 
 ```tsx
 <button data-testid={`${isExpanded ? 'collapse' : 'expand'}-button`} />
-<div data-testid={`benefits-${isAllowed ? 'general' : 'suspicious'}-user`} />
+<div data-testid={`account-${isVerified ? 'verified' : 'unverified'}-banner`} />
 ```
 
 **Tab pattern**:
@@ -48,9 +46,9 @@ data-testid={`${tab.dataTestid ?? toDataTestid(tab.name)}-tab${isActive ? '-acti
 **Suffix conventions**:
 
 - Buttons: `-button` (e.g. `confirm-button`, `edit-button`)
-- Links: `-link` (handled by `Link` component via `dataTestid` prop)
+- Links: `-link` (if the project has a shared link component, pass the ID via its `dataTestid` prop and let it add the suffix)
 - Tabs: `-tab`, `-tab-active`
-- Containers: no suffix (e.g. `betslip-tooltip`, `user-block`)
+- Containers: no suffix (e.g. `cart-tooltip`, `user-block`)
 - Child elements: `{base}-{role}` (e.g. `slider-thumb`, `slider-min-value`)
 
 **Prop name**: use `dataTestid` (camelCase) when passing as a component prop.

@@ -8,15 +8,13 @@ Read the matching doc before writing or editing code in that language — these 
 
 # Code duplication (all software projects)
 
-**Before writing new code, check what already exists.** Search for functions, patterns, or constants that do the same thing. Three similar lines copy-pasted is worse than one named helper — each copy is a future bug waiting to diverge.
+**Before writing new code, check what already exists.** Search for functions, patterns, or constants that do the same thing.
 
-**Extract when a pattern appears twice.** The threshold is two: the second copy is the signal to extract, not the third. Name the helper after what it does, not where it's used.
-
-**During development** — when adding code that resembles something nearby, stop and extract the shared logic into a helper before continuing.
+**Extract when a pattern appears twice.** The second copy is the signal, not the third — each copy is a future bug waiting to diverge. When the code you're adding resembles something nearby, stop and extract the shared logic into a helper before continuing. Name the helper after what it does, not where it's used.
 
 **During review / refactoring** — when touching a file, note any patterns that appear more than once and flag them. If the scope of the task allows, extract them in the same PR; if not, mention them explicitly so they aren't forgotten.
 
-**Configuration and magic values belong in one place.** Constants, regex patterns, type definitions, and tuning parameters should be declared once (in a config or constants file) and referenced everywhere. Never inline a value that appears — or could appear — in more than one location.
+**Configuration and magic values belong in one place.** Constants, regex patterns, type definitions, and tuning parameters should be declared once (in a config or constants file) and referenced everywhere. Never inline a value that appears in more than one location or is a tuning knob someone will want to change.
 
 **The bar for extraction is low; the bar for a new abstraction is high.** A two-line helper that eliminates duplication is always worth it. A new layer of indirection that trades duplication for complexity is not — prefer a clear duplicate over a confusing abstraction.
 

@@ -1,6 +1,6 @@
 # Shell script conventions
 
-### Script basics
+## Script basics
 
 - **Shebang**: `#!/usr/bin/env bash` by default; POSIX `#!/bin/sh` only when portability is required (then avoid bashisms).
 - **Header comment**: one line on what the script does plus its usage — the shell equivalent of the JSDoc rule.
@@ -9,7 +9,7 @@
 - Clean up with `trap ... EXIT`; create temp files with `mktemp`, never fixed `/tmp` names.
 - Don't parse `ls` output; use globs or `find -print0` with `read -d ''`.
 
-### Guardrails
+## Guardrails
 
 - **Lint**: `shellcheck`. **Format**: `shfmt -d` (check) / `shfmt -w` (fix).
 - **Tests**: `bats-core`, and only for scripts with real logic (parsing, branching, destructive operations). For simple glue, shellcheck is enough. See [unit-tests.md](unit-tests.md).
