@@ -1,5 +1,9 @@
 {
   "model": "sonnet",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "playwright@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": false,
