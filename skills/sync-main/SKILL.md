@@ -36,7 +36,9 @@ Bring a feature branch up to date with an updated main/master branch by merging 
    - Run `git status` to list the conflicting files.
    - Open each conflicting file, resolve the `<<<<<<<` / `=======` / `>>>>>>>` markers by choosing or combining the correct content, and remove the markers.
    - Stage each resolved file with `git add <file>`.
-   - Once all conflicts are staged, complete the merge with `git commit` (Git pre-fills a merge commit message — keep it as-is unless the user wants to customize it) or `git merge --continue`.
+   - Run the project's relevant checks (lint, typecheck, tests — whichever it has and the conflicted files touch) and note the results. Don't run builds or scripts with side effects.
+   - Show the user each resolved file with a one-line summary of how it was resolved, plus the check results, and ask before committing. Resolutions are your judgment calls — the user's request to sync doesn't cover them.
+   - On approval, complete the merge with `git commit` (Git pre-fills a merge commit message — keep it as-is unless the user wants to customize it) or `git merge --continue`.
    - Do not use `git merge --abort` unless the user explicitly asks to cancel the sync — it discards the merge in progress.
    - After the merge commit is made, ask before pushing, same as step 6.
 

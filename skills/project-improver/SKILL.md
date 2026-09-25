@@ -1,12 +1,11 @@
 ---
 name: project-improver
 description: Review a whole project against the user's global CLAUDE.md conventions and report gaps, then apply approved fixes. Use when the user asks to review, audit, or improve a project or repo as a whole, check it against their conventions, or make it better for AI-assisted development. Not for reviewing a diff (use code-review) or for README/CLAUDE.md-only audits (use readme-md-improver / claude-md-management:claude-md-improver).
-tools: Read, Glob, Grep, Bash, Edit, Write
 ---
 
 # Project Improver
 
-Audit the **current project** against the user's global `~/.claude/CLAUDE.md` and report where it falls short. The global CLAUDE.md is the single source of truth — this skill only says *how to audit*, never restates the rules. That keeps it correct when the rules change.
+Audit the **current project** against the user's global `~/.claude/CLAUDE.md` and report where it falls short. The global CLAUDE.md is the single source of truth — this skill only says *how to audit*, never restates the rules. That keeps it correct when the rules change. The one deliberate exception is the pre-commit/CI limit under "Hard limits" below, which narrows the global guardrails rule for this skill only.
 
 **Read-only until the user approves.** Produce the report first; change nothing before the user picks what to apply.
 

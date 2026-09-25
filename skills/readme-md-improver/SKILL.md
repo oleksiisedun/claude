@@ -1,7 +1,6 @@
 ---
 name: readme-md-improver
 description: Audit and improve README.md files in repositories. Use when user asks to check, audit, update, improve, or fix README.md files. Scans for README files, evaluates quality against templates, outputs a quality report, then makes targeted updates. Also use when the user mentions "README maintenance" or "documentation audit".
-tools: Read, Glob, Grep, Bash, Edit, Write
 ---
 
 # README.md Improver
@@ -113,7 +112,7 @@ After outputting the quality report, ask the user for confirmation before updati
 
 1. **Propose targeted additions only** — missing install steps, a stale command, an out-of-date architecture description, a missing usage example, an unlisted required env var.
 2. **Verify before writing** — check that commands, file paths, and dependency names discovered during analysis are actually still real (grep/`ls`/`package.json`, etc.) rather than assumed.
-3. **Architecture sections get a diagram** — if the project has more than one real module/service and the README's Architecture section is prose-only (or missing), propose adding a short paragraph plus a ` ```mermaid ` `graph TD` diagram of the same modules and data flow. This is a standing convention for this user's projects, not optional polish — see [references/templates.md](references/templates.md) for the pattern.
+3. **Architecture sections get a diagram** — if the project has more than one real module/service and the README's Architecture section is prose-only (or missing), propose adding a short paragraph plus a ` ```mermaid ` `graph TD` diagram of the same modules and data flow. This is a standing convention for this user's projects, not optional polish — see [references/templates.md](references/templates.md) for the pattern, and check every label against the grammar pitfalls in `~/.claude/docs/readme-mermaid.md` before proposing it.
 4. **Show diffs** — for each change, show which file, the specific addition (diff or quoted block), and a one-line reason.
 5. **Oversized README → propose a split** — if the README is 250+ lines and mixes entry-point content with reference material, propose moving the user-facing reference into new `docs/*.md` files and linking them (same pattern as the user's CLAUDE.md → docs links). Give a table of new files with measured line counts and what the README keeps (description, architecture + diagram, file table, short Features overview, Getting started, Development, Documentation index). Keep user-facing docs separate from any contributor/agent `architecture-*.md` docs. Ask before splitting. Full method: [references/splitting-guidelines.md](references/splitting-guidelines.md).
 6. **Propose a CLAUDE.md pointer** — after a split (or any change to where reference docs live), if the project's CLAUDE.md maps its docs, propose a short line pointing at the new docs and saying when to update them. Propose it; don't add it unprompted.
