@@ -32,11 +32,11 @@ In projects that use Playwright, read [docs/playwright-tests.md](docs/playwright
 
 # Front-end repos only
 
-### data-testid
+## data-testid
 
 In front-end projects that use `data-testid` attributes, read [docs/data-testid.md](docs/data-testid.md) before adding or changing one, and follow its naming and structure conventions.
 
-### CSS design system
+## CSS design system
 
 When starting a new HTML/CSS project or touching a stylesheet for the first time, define `:root` tokens (colors, radius) and shared classes (`.btn-primary`, `.overlay`) **before** writing one-off component rules, with one broad rule per interaction state (disabled, focus, hover). Check existing rules before adding a new one. Full rules: [docs/css-design-system.md](docs/css-design-system.md).
 
@@ -44,27 +44,27 @@ When starting a new HTML/CSS project or touching a stylesheet for the first time
 
 The goal is a repo where an agent can orient quickly, verify its own work, and not repeat past mistakes. When working in any project, look for gaps in the areas below and suggest fixes — never add tooling, hooks, or config unprompted.
 
-### Machine-checkable guardrails
+## Machine-checkable guardrails
 
-When working in a project, check whether it has commands an agent can run to verify its own work — a linter, a type checker, a formatter check, a build, a dependency/import-boundary check. If some are missing, suggest adding them (don't add them unprompted), and say which mistakes each would catch. Prefer a check that fails loudly with a non-zero exit code over a convention that only lives in prose.
+When working in a project, check whether it has commands an agent can run to verify its own work — a linter, a type checker, a formatter check, a build, a dependency/import-boundary check. If some are missing, suggest adding them, and say which mistakes each would catch. Prefer a check that fails loudly with a non-zero exit code over a convention that only lives in prose.
 
 - **One entry point**: expose the checks as named scripts (e.g. `npm run lint`, `npm run typecheck`, `make check`) and, if there are several, a single aggregate command, so an agent doesn't have to guess the invocation.
 - **Fast and deterministic**: guardrails an agent runs after every edit should finish in seconds and never depend on network or flaky state. Slower checks belong in CI, not in the edit loop.
 - **Turn recurring review comments into rules**: if the same mistake keeps getting corrected by hand (a banned pattern, a naming convention, a forbidden import), suggest encoding it as a lint rule or a small script rather than restating it in CLAUDE.md.
-- **Enforce at the edges too**: suggest wiring the aggregate command into a pre-commit hook or CI so the guardrail can't be skipped — but never install hooks or CI config unprompted.
+- **Enforce at the edges too**: suggest wiring the aggregate command into a pre-commit hook or CI so the guardrail can't be skipped.
 - **Document the commands** in the project's CLAUDE.md so future sessions know what to run and when.
-- **Stay within existing tooling**: lead with static checks (lint, types, format, build). Suggest a new test framework (unit or otherwise) only if it fills a real gap, and never add one unprompted (see [docs/unit-tests.md](docs/unit-tests.md) for where tests pay off).
+- **Stay within existing tooling**: lead with static checks (lint, types, format, build). Suggest a new test framework (unit or otherwise) only if it fills a real gap (see [docs/unit-tests.md](docs/unit-tests.md) for where tests pay off).
 - **Language-specific picks**: concrete linters/type checkers per language live in the language docs linked under "Language conventions" above.
 
-### Keep CLAUDE.md and README current
+## Keep CLAUDE.md and README current
 
 After completing any code edits, check whether the changes affect the README or CLAUDE.md — update them if the architecture, conventions, or project setup have changed. Don't update them for routine bug fixes or small internal changes that don't affect how the project is used or understood.
 
-If the project has no CLAUDE.md or no README, suggest adding one — don't add it unprompted.
+If the project has no CLAUDE.md or no README, suggest adding one.
 
 When creating a new README, or adding/rewriting an "Architecture" section, suggest a short prose paragraph plus a Mermaid `graph TD` diagram (in README.md, never CLAUDE.md). Check every label against Mermaid's grammar pitfalls before finalizing: [docs/readme-mermaid.md](docs/readme-mermaid.md).
 
-### Docs, splitting and ADRs
+## Docs, splitting and ADRs
 
 If CLAUDE.md or README has grown large enough that a section would read better on its own (a lengthy convention writeup, detailed setup steps, etc.), suggest splitting it into a `/docs` directory and linking to it, rather than letting the root file keep growing.
 
@@ -72,7 +72,7 @@ When linking to a split-out doc from CLAUDE.md, choose the reference form delibe
 
 If a design or architecture choice keeps getting re-derived or re-litigated across sessions (e.g. re-explaining why a library was picked over an alternative, or why a pattern that looks wrong is actually intentional), record it as a short ADR in `docs/decisions/` (e.g. `docs/decisions/0003-use-x-over-y.md`: context, decision, consequences) instead of re-explaining it each time. Link to it from CLAUDE.md or the README with a plain Markdown link, not `@import`.
 
-### Scoped files
+## Scoped files
 
 Small, single-purpose files are cheaper for an agent to navigate and fit in context. Keep files scoped to one responsibility. If a file grows past roughly 300-400 lines **and** contains more than one clear responsibility (e.g. a service class plus its unrelated helpers, or a component plus unrelated utility functions), split it along that responsibility boundary into separate files.
 
@@ -82,18 +82,18 @@ When splitting, name each new file after the responsibility it holds, not after 
 
 # Agent behavior and safety
 
-### Git commits
+## Git commits
 
 Split changes into logical commits — one concern per commit, each with a clear, descriptive message.
 Never commit or push automatically — only do so after a direct explicit command from the user.
 
 Before committing, check whether the project has guardrail commands (lint, typecheck, format check, build, tests) and run the ones relevant to what changed — but only when it makes sense for the change. A pure docs/comment/config-value change doesn't warrant a linter or test run; a logic change does. Use judgment on which specific checks apply rather than always running the full suite.
 
-### Working directory boundaries (all projects)
+## Working directory boundaries (all software projects)
 
 Never read, browse, or search files outside the current project's working directory — including other project folders elsewhere on disk (e.g. to borrow ideas, styling, or patterns) — unless the user has explicitly given permission and named the path in the current conversation. This applies even if it seems like it would produce a better or faster result. If outside context would genuinely help, ask the user first and name the specific path you want to look at.
 
-### Google Apps Script (clasp)
+## Google Apps Script (clasp)
 
 Never run `clasp push` (or any command that deploys/pushes code to Apps Script) unless the user gives a direct, explicit command to do so in that moment. Making the code change is fine — pushing it live is not, without asking first.
 
