@@ -42,6 +42,15 @@ def md_lines(path):
                 yield i, line
 
 
+def heading_anchors(path: str) -> set[str]:
+    seen = {}
+    return {
+        slug(m.group(1), seen)
+        for _, line in md_lines(path)
+        if (m := re.match(r'#{1,6}\s+(.*)', line))
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--original', help='pre-split README to compare content against')
@@ -49,14 +58,7 @@ def main():
 
     files = [f for f in ['README.md'] if os.path.exists(f)]
     files += sorted(glob.glob('docs/**/*.md', recursive=True))
-    anchors = {}
-    for f in files:
-        seen = {}
-        anchors[os.path.normpath(f)] = {
-            slug(m.group(1), seen)
-            for _, line in md_lines(f)
-            if (m := re.match(r'#{1,6}\s+(.*)', line))
-        }
+    anchors = {}  # any linked .md, not just the scanned files (e.g. CLAUDE.md)
 
     checked = broken = 0
     for f in files:
@@ -71,9 +73,12 @@ def main():
                 if not os.path.exists(dest):
                     print(f'{f}:{i} missing file: {target}')
                     broken += 1
-                elif frag and dest.endswith('.md') and frag not in anchors.get(dest, set()):
-                    print(f'{f}:{i} missing anchor: {target}')
-                    broken += 1
+                elif frag and dest.endswith('.md'):
+                    if dest not in anchors:
+                        anchors[dest] = heading_anchors(dest)
+                    if frag not in anchors[dest]:
+                        print(f'{f}:{i} missing anchor: {target}')
+                        broken += 1
     print(f'{checked} relative links checked, {broken} broken')
 
     if args.original:
