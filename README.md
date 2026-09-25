@@ -26,7 +26,7 @@ Personal configuration for [Claude Code](https://claude.ai/code) — the Anthrop
 
 | Section | Summary |
 |---|---|
-| [Language conventions](CLAUDE.md#language-conventions) | Read-before-editing pointers: [docs/javascript.md](docs/javascript.md) (ES2020+ only; full `@param`/`@returns` JSDoc on plain `.js`, sparse on `.ts`/`.tsx`), [docs/python.md](docs/python.md) (uv, ruff, type hints, docstring only when non-obvious), [docs/shell.md](docs/shell.md) (bash strict mode, quoting, shellcheck/shfmt) |
+| [Language conventions](CLAUDE.md#language-conventions) | Read-before-editing pointers: [docs/javascript.md](docs/javascript.md) (ES2020+ only; full `@param`/`@returns` JSDoc on plain `.js`, sparse on `.ts`/`.tsx`; ESLint, tsc, Prettier), [docs/python.md](docs/python.md) (uv, ruff, type hints, docstring only when non-obvious), [docs/shell.md](docs/shell.md) (bash strict mode, quoting, shellcheck/shfmt) |
 | [Code duplication (all software projects)](CLAUDE.md#code-duplication-all-software-projects) | Extract a helper on the second duplicate, not the third; centralize config and magic values; prefer a clear duplicate over a confusing abstraction |
 | [Unit tests (all software projects)](CLAUDE.md#unit-tests-all-software-projects) | Use the existing test setup: add/update tests for new logic and fixes and run them without asking; flag untested code worth covering; suggest a setup if none, never add one unprompted — details in [docs/unit-tests.md](docs/unit-tests.md) |
 | [Playwright Tests (E2E)](CLAUDE.md#playwright-tests-e2e) | Ask before running new tests; fix broken tests by inspecting the UI/code first, not by running them; full rules in [docs/playwright-tests.md](docs/playwright-tests.md) |

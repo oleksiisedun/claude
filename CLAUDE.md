@@ -2,7 +2,7 @@
 
 Read the matching doc before writing or editing code in that language — these are not loaded automatically.
 
-- **JavaScript / TypeScript** (`.js`, `.ts`, `.tsx`): [docs/javascript.md](docs/javascript.md) — modern JS only, JSDoc rules, test runner.
+- **JavaScript / TypeScript** (`.js`, `.ts`, `.tsx`): [docs/javascript.md](docs/javascript.md) — modern JS only, JSDoc rules, ESLint/tsc/Prettier, test runner.
 - **Python** (`.py`): [docs/python.md](docs/python.md) — tooling, type hints, docstring rule, pytest.
 - **Shell** (`.sh`, bash scripts): [docs/shell.md](docs/shell.md) — strict mode, quoting, shellcheck/shfmt, bats.
 

@@ -21,6 +21,15 @@ function getImageAsBase64(fileId) { ... }
 
 **Keeping JSDoc in sync** — when a function's signature or behavior changes (added/removed/renamed parameters, changed types or return value, changed purpose), update its JSDoc in the same edit so it describes the current behavior.
 
+### Guardrails
+
+Use what the project already has; when suggesting a missing check (don't add it unprompted):
+
+- **Lint**: ESLint with a flat config (`eslint.config.js`) — `@eslint/js` recommended, plus `typescript-eslint` for TS. Apps Script needs runtime-specific settings: see [google-apps-script.md](google-apps-script.md#linting).
+- **Types**: TS — `tsc --noEmit`. Plain JS — a `jsconfig.json` with `allowJs` + `checkJs`, run as `tsc --noEmit -p jsconfig.json`, so the JSDoc types above are actually checked.
+- **Format**: Prettier — `prettier --check .` as the check, `prettier --write .` to fix.
+- **One entry point**: expose each as an npm script (`lint`, `typecheck`, `format:check`, `test`) plus an aggregate `check` that runs them all. Document it in the project's CLAUDE.md.
+
 ### Testing
 
 Where tests are worth adding, see [unit-tests.md](unit-tests.md). Use the project's existing runner; when suggesting one for a project that has none:
