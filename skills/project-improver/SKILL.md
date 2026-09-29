@@ -56,7 +56,7 @@ Walk the CLAUDE.md **section by section**, in order, skipping sections that don'
 | CLAUDE.md and README currency | Do commands, paths, and described structure match the repo now? Missing CLAUDE.md/README → suggest. Architecture section lacking a Mermaid diagram (checked against `docs/readme-mermaid.md`) → suggest. For a deep pass, hand off to `readme-md-improver` / `claude-md-management:claude-md-improver`. |
 | Docs, splitting and ADRs | Oversized CLAUDE.md/README sections that should move to `docs/`; `@import` vs plain link used correctly; design choices that look wrong-but-intentional and deserve an ADR. |
 | Scoped files | Files past ~300-400 lines **and** with more than one responsibility. Length alone is not a finding — cohesive long files are fine. |
-| Agent behavior and safety | Mostly rules for how *you* behave; check the project side only where relevant (e.g. clasp project layout per `docs/google-apps-script.md`). |
+| Agent behavior and safety | Mostly rules for how *you* behave; check the project side only where relevant. For clasp projects, always check the layout against the "Project layout" section of `docs/google-apps-script.md`; any mismatch → a finding **and** an `S` suggestion. `.clasp.json` is usually git-ignored — if it's absent, judge by whether `src/` exists and the README's setup mentions `rootDir`, not by the missing file. Never skip this check. |
 
 Run existing, fast, read-only checks (lint, typecheck, tests) to ground findings in real output — but not builds or scripts with side effects. Verify every claim against the repo (`grep`, `ls`, tool `--help`); don't report from assumption. Drop findings you can't back with a file/line or command output.
 
