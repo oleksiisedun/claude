@@ -85,13 +85,15 @@ Output the report **before** any change. Keep it scannable:
 - **2a · ...**
 
 ### Suggestions (need explicit approval — not applied by default)
-- **S1** <new tooling / test framework>, with the mistakes it would catch
+- **S1** <new tooling / test framework / file move or restructure>, with the mistakes it would catch or the finding it resolves
 
 ### Already good
 - <brief list of sections/areas that comply>
 ```
 
 **IDs.** Every finding and suggestion gets a short ID so the user can pick by typing it instead of copying titles. Number the sections 1, 2, 3... in report order (only sections that appear in the report); findings within a section are lettered `a`, `b`, `c`... (`2a`, `2b`); suggestions are `S1`, `S2`... IDs are assigned once in the report and never renumbered afterwards. "Top priorities" only references IDs — it doesn't get its own numbering. A bare section number (`2`) selects every finding in that section.
+
+**Suggestions must be complete.** Decide by the kind of change, not the wording of the *Fix*: introducing new tooling or a test framework, creating new files or directories, or moving/restructuring existing files must appear in **Suggestions** with its own `S` ID, even if it is also a finding. In-place edits (add a JSDoc, a test to an existing setup, rename an identifier, extract a helper) stay findings only. A finding may reference its suggestion (`see S3`) but must not replace it. Before finalizing, cross-check that every finding of that kind has a matching `S` entry and that each `S` entry is referenced by the finding that motivated it — except the `docs/<language>.md` suggestion for undocumented languages, which has no finding.
 
 Rank by impact on an agent's ability to orient, verify its own work, and avoid regressions — not by count. Separate **fixes** (bring existing code in line with the rules) from **suggestions** (add something new). Don't pad: a compliant section is one line.
 
@@ -105,13 +107,13 @@ Rank by impact on an agent's ability to orient, verify its own work, and avoid r
 | D | At least one High |
 | F | The area is absent entirely (e.g. no checks of any kind, no CLAUDE.md) |
 
-Skipped sections get no grade. Do **not** compute a numeric score or an overall average — sections differ too much in weight (guardrails and CLAUDE.md/README currency matter far more than scoping) for an average to mean anything. Something the rules call for that is missing (no lint/type check, no test setup, no README) is itself a finding, graded by its severity — F if the whole area is absent. The **Suggestions** section only holds the concrete tooling proposals for those gaps and is not graded separately.
+Skipped sections get no grade. Do **not** compute a numeric score or an overall average — sections differ too much in weight (guardrails and CLAUDE.md/README currency matter far more than scoping) for an average to mean anything. Something the rules call for that is missing (no lint/type check, no test setup, no README) is itself a finding, graded by its severity — F if the whole area is absent. The **Suggestions** section holds the concrete proposals for those gaps (tooling, new files, moves/restructures) and is not graded separately.
 
 End by asking which items to apply, by ID — e.g. `1a, 2b, S1`, a whole section (`2`), `all fixes`, or `none`.
 
 ### Phase 5: Apply
 
-Apply only what the user approved (resolve the IDs they give against the report), following the language docs and the duplication/scoping rules while editing. Then:
+Apply only what the user approved (resolve the IDs they give against the report). When a finding and an `S` entry describe the same change, picking either ID applies it; `all fixes` covers findings only, never `S` entries. Follow the language docs and the duplication/scoping rules while editing. Then:
 
 - Re-run the relevant lint/type/test commands and report actual results; if something fails, say so with the output.
 - Re-grade only the sections you touched, re-checking each against the repo (not from memory of what you changed), and show a before/after table. Sections whose findings the user declined keep their old grade.
