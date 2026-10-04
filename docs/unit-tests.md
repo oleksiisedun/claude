@@ -1,6 +1,6 @@
 # Unit tests
 
-The always-on rules (use the existing setup, run tests without asking — the ask-first rule is Playwright-only — never add a framework unprompted) live in [CLAUDE.md](../CLAUDE.md). This doc covers where tests are worth writing. Framework picks per language: [javascript.md](javascript.md), [python.md](python.md), [shell.md](shell.md). Unit tests cover logic; UI flows belong in Playwright: [playwright-tests.md](playwright-tests.md).
+The always-on rules (use the existing setup, run tests without asking, never add a framework unprompted) live in [CLAUDE.md](../CLAUDE.md). This doc covers where tests are worth writing. Framework picks per language: [javascript.md](javascript.md), [python.md](python.md), [shell.md](shell.md). Unit tests cover logic; UI flows belong in Playwright: [playwright-tests.md](playwright-tests.md).
 
 ## Where tests pay off
 

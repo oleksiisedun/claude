@@ -20,13 +20,13 @@ Read the matching doc before writing or editing code in that language — these 
 
 # Unit tests (all software projects)
 
-If the project has a test setup, use it: add or update unit tests for new logic and bug fixes, and run the relevant tests before calling the work done — without asking (the ask-first rule is Playwright-only). While working, proactively flag untested code where a test would really help, naming the function and the bug it would catch. If there is no test setup, suggest one (see the guardrails section below) — never add a framework unprompted.
+If the project has a test setup, use it: add or update unit tests for new logic and bug fixes, and run the relevant tests before calling the work done — without asking. While working, proactively flag untested code where a test would really help, naming the function and the bug it would catch. If there is no test setup, suggest one (see the guardrails section below) — never add a framework unprompted.
 
 Read [docs/unit-tests.md](docs/unit-tests.md) before writing tests or suggesting them — it covers where tests pay off, what to skip, and testability.
 
 # Playwright Tests (E2E)
 
-In projects that use Playwright, read [docs/playwright-tests.md](docs/playwright-tests.md) before writing, running, or fixing a test — it says when not to run one.
+In projects that use Playwright, read [docs/playwright-tests.md](docs/playwright-tests.md) before writing or fixing a test.
 
 # Front-end repos only
 
