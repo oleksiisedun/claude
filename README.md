@@ -7,7 +7,6 @@ Personal configuration for [Claude Code](https://claude.ai/code) — the Anthrop
 | File / Directory | Purpose |
 |---|---|
 | `CLAUDE.md` | Global coding conventions loaded by Claude at the start of every session |
-| `settings.json` | Claude Code CLI settings — model, plugins, UI, permissions |
 | `statusline-command.sh` | Status line script — model, effort level, session (5h) usage bar, context usage bar |
 | `docs/` | Situational convention detail linked from `CLAUDE.md` and read on demand: `javascript.md`, `python.md`, `shell.md`, `data-testid.md`, `playwright-tests.md`, `unit-tests.md`, `css-design-system.md`, `readme-mermaid.md`, `google-apps-script.md` |
 | `skills/` | Personal skills (`SKILL.md` per subdirectory), available across every project |
